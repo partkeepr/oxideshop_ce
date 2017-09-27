@@ -656,7 +656,7 @@ CREATE TABLE IF NOT EXISTS `oxinvitations` (
    `OXTIMESTAMP` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP COMMENT 'Timestamp',
     KEY `OXUSERID` (`OXUSERID`),
     KEY `OXDATE` (`OXDATE`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT 'User sent invitations';
+) ENGINE=InnoDB COMMENT 'User sent invitations';
 
 #
 # Table structure for table `oxlinks`
@@ -815,7 +815,7 @@ CREATE TABLE IF NOT EXISTS `oxobject2action` (
   PRIMARY KEY  (`OXID`),
   KEY `OXOBJECTID` (`OXOBJECTID`),
   KEY `OXACTIONID` (`OXACTIONID`,`OXCLASS`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci COMMENT 'Shows many-to-many relationship between actions (oxactions) and objects (table set by oxclass)';
+) ENGINE=InnoDB COMMENT 'Shows many-to-many relationship between actions (oxactions) and objects (table set by oxclass)';
 
 #
 # Table structure for table `oxobject2article`
