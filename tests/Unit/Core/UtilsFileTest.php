@@ -64,12 +64,14 @@ class UtilsFileTest extends \OxidTestCase
      */
     public function testUrlValidateBadUrl()
     {
+        $this->activateTheme('flow');
         $oUtilsFile = oxNew('oxUtilsFile');
         $this->assertFalse($oUtilsFile->urlValidate("test/notvalid"));
         $this->assertFalse($oUtilsFile->urlValidate("http://www.oxid_non_existing_page.com"));
 
         $shopUrl = $this->getTestConfig()->getShopUrl();
-        $this->assertTrue($oUtilsFile->urlValidate($shopUrl ."?param=value"));
+        $url = $shopUrl ."?param=value";
+        $this->assertTrue($oUtilsFile->urlValidate($url));
     }
 
     public function testCheckFile()

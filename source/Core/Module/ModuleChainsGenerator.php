@@ -333,7 +333,7 @@ class ModuleChainsGenerator
             if (!class_exists($moduleClassParentAlias, false)) {
                 class_alias($parentClass, $moduleClassParentAlias);
             }
-            include_once $moduleClassFile;
+            $success = include_once $moduleClassFile;
 
             /**
              * Test if the class could be loaded

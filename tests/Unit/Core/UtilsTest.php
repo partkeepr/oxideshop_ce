@@ -824,6 +824,7 @@ class UtilsTest extends \OxidTestCase
      */
     public function testGetRemoteCachePath()
     {
+        $this->activateTheme('flow');
         $vfsStream = $this->getVfsStreamWrapper();
         $file = \org\bovigo\vfs\vfsStream::newFile('actions_main.inc.php')->withContent('')->at($vfsStream->getRoot());
         $tempFile = $vfsStream->getRootPath() .'actions_main.inc.php';

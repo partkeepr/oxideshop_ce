@@ -94,11 +94,12 @@ class FunctionsTest extends \OxidTestCase
 
     public function testOxNewWithNonExistingClassName()
     {
-        $this->stubExceptionToNotWriteToLog(SystemComponentException::class,  SystemComponentException::class);
-
-        $this->setExpectedException(SystemComponentException::class, 'non_existing_class');
-
-        oxNew("non_existing_class");
+        try {
+            oxNew("non_existing_class");
+            $this->fail('An exception should have been thrown at this point');
+        } catch (SystemComponentException $exception) {
+            $this->assertContains('non_existing_class', $exception->getMessage());
+        }
     }
 
     public function testOx_get_template()

@@ -1720,6 +1720,8 @@ class Config extends \OxidEsales\Eshop\Core\Base
     /**
      * Returns build revision number or false on read error.
      *
+     * @deprecated
+     *
      * @return bool|string
      */
     public function getRevision()

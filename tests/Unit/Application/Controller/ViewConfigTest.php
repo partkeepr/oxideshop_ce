@@ -6,10 +6,8 @@
 namespace OxidEsales\EshopCommunity\Tests\Unit\Application\Controller;
 
 use OxidEsales\EshopCommunity\Application\Model\CountryList;
-
-use \stdClass;
-use \oxRegistry;
-use \oxTestModules;
+use oxTestModules;
+use stdClass;
 
 class ViewConfigTest extends \OxidTestCase
 {
@@ -524,8 +522,8 @@ class ViewConfigTest extends \OxidTestCase
         $config->setConfigParam("iDebug", -1);
         $fakeShopDirectory = $config->getConfigParam('sShopDir');
         $message = "Requested file not found for module test1 (" .
-            $fakeShopDirectory . "modules/test1/out/blocks/non_existing_template.tpl)";
-        $this->setExpectedException('\OxidEsales\EshopCommunity\Core\Exception\FileException', $message);
+        $fakeShopDirectory . "modules/test1/out/blocks/non_existing_template.tpl)";
+        $this->setExpectedException(\OxidEsales\Eshop\Core\Exception\FileException::class, $message);
 
         /** @var oxViewConfig|PHPUnit_Framework_MockObject_MockObject $viewConfig */
         $viewConfig = $this->getMock(\OxidEsales\Eshop\Core\ViewConfig::class, array('getConfig'));
@@ -542,6 +540,10 @@ class ViewConfigTest extends \OxidTestCase
      */
     public function testGetModulePathNoExceptionThrownWhenPathNotFoundAndDebugDisabled()
     {
+        $this->stubExceptionToNotWriteToLog(
+            \OxidEsales\Eshop\Core\Exception\FileException::class,
+            \OxidEsales\Eshop\Core\Exception\FileException::class
+        );
         $config = $this->fakeModuleStructure();
         $config->setConfigParam("iDebug", 0);
 

@@ -79,6 +79,7 @@ class DatabaseTest extends UnitTestCase
 
     public function testGetDbThrowsDatabaseConnectionException()
     {
+        $expectedException = \OxidEsales\Eshop\Core\Exception\DatabaseConnectionException::class;
         /** @var ConfigFile $configFileBackup Backup of the configFile as stored in Registry. This object must be restored */
         $configFileBackup = Registry::get('oxConfigFile');
 
@@ -86,19 +87,20 @@ class DatabaseTest extends UnitTestCase
         Registry::set(\OxidEsales\Eshop\Core\ConfigFile::class, $configFile);
         $this->setProtectedClassProperty(oxDb::getInstance(), 'db', null);
 
-        $this->setExpectedException('OxidEsales\EshopCommunity\Core\Exception\DatabaseConnectionException');
-
         try {
             oxDb::getDb();
-        } catch (DatabaseConnectionException $exception) {
+            $this->fail('An exception of type ' . $expectedException . ' should have been thrown.');
+        } catch (\OxidEsales\Eshop\Core\Exception\DatabaseConnectionException $exception) {
+            // catching the expected exception
+        } finally {
             /** Restore original configFile object */
             Registry::set(\OxidEsales\Eshop\Core\ConfigFile::class, $configFileBackup);
-            throw $exception;
         }
     }
 
     public function testGetDbThrowsDatabaseNotConfiguredException()
     {
+        $expectedException = \OxidEsales\Eshop\Core\Exception\DatabaseNotConfiguredException::class;
         /** @var ConfigFile $configFileBackup Backup of the configFile as stored in Registry. This object must be restored */
         $configFileBackup = Registry::get('oxConfigFile');
 
@@ -107,14 +109,13 @@ class DatabaseTest extends UnitTestCase
         Registry::set(\OxidEsales\Eshop\Core\ConfigFile::class, $configFile);
         $this->setProtectedClassProperty(oxDb::getInstance(), 'db', null);
 
-        $this->setExpectedException('OxidEsales\EshopCommunity\Core\Exception\DatabaseNotConfiguredException');
-
         try {
             oxDb::getDb();
-        } catch (DatabaseNotConfiguredException $exception) {
+            $this->fail('An exception of type ' . $expectedException . ' should have been thrown.');
+        } catch (\OxidEsales\Eshop\Core\Exception\DatabaseNotConfiguredException $exception) {
+        } finally {
             /** Restore original configFile object */
             Registry::set(\OxidEsales\Eshop\Core\ConfigFile::class, $configFileBackup);
-            throw $exception;
         }
     }
 

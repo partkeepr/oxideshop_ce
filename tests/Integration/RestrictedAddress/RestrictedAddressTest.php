@@ -61,6 +61,8 @@ class RestrictedAddressTest extends \OxidTestCase
      */
     public function providerRequestGetRevisionThatResultsInNoValidNewActionGetsRedirectedToStart()
     {
+        $this->markTestSkipped('Method \OxidEsales\EshopCommunity\Core\Config::getRevision has been deprecated');
+
         $shopUrl = $this->getConfig()->getShopMainUrl();
 
         return array(
@@ -84,6 +86,8 @@ class RestrictedAddressTest extends \OxidTestCase
      */
     public function testRequestGetRevisionThatResultsInNoValidNewActionGetsRedirectedToStart($forbiddenUrl)
     {
+        $this->markTestSkipped('Method \OxidEsales\EshopCommunity\Core\Config::getRevision has been deprecated');
+
         $shopUrl = $this->getConfig()->getShopMainUrl();
 
         $result = $this->callPage($forbiddenUrl);
